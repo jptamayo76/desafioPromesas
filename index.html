@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="es">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Desafio Promesas - Dia 2</title>
+    <script>
+
+        const getInfoPromise = () => {
+            return new Promise((resolve) => {
+                setTimeout(() => { resolve('Informacion enviada') }, 3000)
+            })
+        }
+
+        const show20Datos = (arr) => {
+            console.log("Primeros 20 títulos de álbumes ofrecidos...");
+            let arr20 = arr.slice(0, 20);
+            arr20.forEach(element => {
+                console.log(element);
+            });
+        }
+
+        const getDatos = async (callback) => {
+            const URL = 'https://jsonplaceholder.typicode.com/photos';
+            try {
+                const msj = await getInfoPromise();
+                console.log(msj);
+
+                const response = await fetch(URL);
+                const datos = await response.json();
+                // console.log(datos);
+                // const datos2 = await response.text();
+                // console.log(datos2);
+                callback(datos);
+            } catch (err) {
+                console.log(err);
+            }
+        }
+
+        getDatos(show20Datos);
+
+    </script>
+</head>
+
+<body>
+
+</body>
+
+</html>
